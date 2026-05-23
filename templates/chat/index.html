@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aria — دستیار هوشمند</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="app">
+
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="brand">Aria <span>AI</span></div>
+    </div>
+    <div class="status-dot"><div class="dot"></div><span>آنلاین</span></div>
+    <div class="header-right">
+      <button class="icon-btn" onclick="clearChat()" title="پاک کردن چت">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6l-1 14H6L5 6"/>
+          <path d="M10 11v6M14 11v6"/>
+          <path d="M9 6V4h6v2"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="messages-wrap" id="messages">
+    <div class="welcome" id="welcome">
+      <div class="welcome-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h2>سلام! من <span>Aria</span> هستم</h2>
+      <p>دستیار هوشمند شما. هر سوالی داری بپرس — از کد نویسی تا مشاوره و هر چیز دیگه‌ای.</p>
+      <div class="suggestions">
+        <button class="suggestion" onclick="useSuggestion(this)">یه کد پایتون بنویس</button>
+        <button class="suggestion" onclick="useSuggestion(this)">برام توضیح بده Django چیه</button>
+        <button class="suggestion" onclick="useSuggestion(this)">یه ایده پروژه بده</button>
+        <button class="suggestion" onclick="useSuggestion(this)">فرق REST و GraphQL چیه؟</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-box">
+      <textarea
+        id="msg-input"
+        placeholder="پیامت رو بنویس..."
+        rows="1"
+        maxlength="4000"
+      ></textarea>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+    <div class="input-footer">
+      <span class="input-hint">Enter برای ارسال &nbsp;·&nbsp; Shift+Enter برای خط جدید</span>
+      <span class="char-count" id="char-count">0 / 4000</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+{# CSRF token رو به JS پاس میدیم تا بتونه POST بفرسته #}
+<script>
+  const CSRF_TOKEN = "{{ csrf_token }}";
+  const CHAT_URL = "{% url 'chat:chat_bot' %}";
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
