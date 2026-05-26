@@ -2,7 +2,7 @@
   <h1 style="text-align:center; color:#2c3e50;">Django Ai Chat</h1>
 
   <p align="center">
-  <img src="./docs/django.png" width="700"/>
+  <img src="./docs/chat.png" width="700"/>
   </p>
 </section>
 
