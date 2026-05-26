@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام — Aria AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
+
+<body>
+    <div class="page">
+        <div class="card">
+
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <div class="logo-text">Aria <em>AI</em></div>
+            </div>
+            {% block content %}
+
+            {% endblock %}
+
+            <p class="footer-note">با ثبت‌نام، قوانین و حریم خصوصی Aria AI را می‌پذیرید.</p>
+        </div>
+
+
+        <script src="{% static 'account/js/script.js' %}"></script>
+
+</body>
+
+</html>

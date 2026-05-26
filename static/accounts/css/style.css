@@ -1,0 +1,417 @@
+ /* ── Variables ── */
+ :root {
+     --bg: #0d0d0f;
+     --bg2: #111113;
+     --bg3: #1a1a1e;
+     --bg4: #222228;
+     --border: rgba(255, 255, 255, 0.07);
+     --border2: rgba(255, 255, 255, 0.13);
+     --accent: #6ee7b7;
+     --accent2: #34d399;
+     --accent-dim: rgba(110, 231, 183, 0.1);
+     --accent-glow: rgba(110, 231, 183, 0.18);
+     --danger: #f87171;
+     --danger-dim: rgba(248, 113, 113, 0.1);
+     --text: #f0f0f0;
+     --text2: #a0a0a8;
+     --text3: #505058;
+     --radius: 16px;
+     --radius-sm: 10px;
+     --radius-xs: 7px;
+ }
+
+ *,
+ *::before,
+ *::after {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
+
+ html,
+ body {
+     min-height: 100dvh;
+     background: var(--bg);
+     color: var(--text);
+     font-family: 'Vazirmatn', sans-serif;
+     font-size: 15px;
+     line-height: 1.6;
+ }
+
+ /* Grid background */
+ body::before {
+     content: '';
+     position: fixed;
+     inset: 0;
+     background-image:
+         linear-gradient(rgba(110, 231, 183, 0.022) 1px, transparent 1px),
+         linear-gradient(90deg, rgba(110, 231, 183, 0.022) 1px, transparent 1px);
+     background-size: 44px 44px;
+     pointer-events: none;
+     z-index: 0;
+ }
+
+ /* Glow blob */
+ body::after {
+     content: '';
+     position: fixed;
+     top: -120px;
+     left: 50%;
+     transform: translateX(-50%);
+     width: 600px;
+     height: 400px;
+     background: radial-gradient(ellipse, rgba(110, 231, 183, 0.07) 0%, transparent 70%);
+     pointer-events: none;
+     z-index: 0;
+ }
+
+ /* ── Page layout ── */
+ .page {
+     position: relative;
+     z-index: 1;
+     min-height: 100dvh;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     padding: 32px 16px;
+ }
+
+ /* ── Card ── */
+ .card {
+     width: 100%;
+     max-width: 420px;
+     background: var(--bg2);
+     border: 1px solid var(--border2);
+     border-radius: 22px;
+     padding: 36px 32px 32px;
+     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+     animation: slideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+ }
+
+ @keyframes slideUp {
+     from {
+         opacity: 0;
+         transform: translateY(20px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ /* ── Logo ── */
+ .logo {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 12px;
+     margin-bottom: 28px;
+ }
+
+ .logo-icon {
+     width: 44px;
+     height: 44px;
+     border-radius: 13px;
+     background: var(--accent-dim);
+     border: 1px solid rgba(110, 231, 183, 0.28);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .logo-icon svg {
+     width: 22px;
+     height: 22px;
+     stroke: var(--accent);
+     fill: none;
+     stroke-width: 1.7;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+ }
+
+ .logo-text {
+     font-size: 1.35rem;
+     font-weight: 700;
+     letter-spacing: -0.3px;
+ }
+
+ .logo-text em {
+     color: var(--accent);
+     font-style: normal;
+ }
+
+ /* ── Heading ── */
+ .heading {
+     text-align: center;
+     margin-bottom: 28px;
+ }
+
+ .heading h1 {
+     font-size: 1.2rem;
+     font-weight: 700;
+     margin-bottom: 6px;
+ }
+
+ .heading p {
+     font-size: 0.83rem;
+     color: var(--text2);
+ }
+
+ /* ── Messages ── */
+ .msg-list {
+     margin-bottom: 18px;
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+ }
+
+ .msg {
+     display: flex;
+     align-items: flex-start;
+     gap: 9px;
+     padding: 10px 13px;
+     border-radius: var(--radius-xs);
+     font-size: 0.82rem;
+     line-height: 1.55;
+ }
+
+ .msg.error {
+     background: var(--danger-dim);
+     border: 1px solid rgba(248, 113, 113, 0.2);
+     color: var(--danger);
+ }
+
+ .msg.success {
+     background: var(--accent-dim);
+     border: 1px solid rgba(110, 231, 183, 0.2);
+     color: var(--accent);
+ }
+
+ .msg-icon {
+     font-size: 0.9rem;
+     flex-shrink: 0;
+     margin-top: 1px;
+ }
+
+ /* ── Form ── */
+ .form {
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+ }
+
+ .field {
+     display: flex;
+     flex-direction: column;
+     gap: 7px;
+ }
+
+ .field label {
+     font-size: 0.82rem;
+     font-weight: 600;
+     color: var(--text2);
+     display: flex;
+     align-items: center;
+     gap: 6px;
+ }
+
+ .field label svg {
+     width: 13px;
+     height: 13px;
+     stroke: var(--text3);
+     flex-shrink: 0;
+ }
+
+ .input-wrap {
+     position: relative;
+ }
+
+ .input-wrap input {
+     width: 100%;
+     padding: 11px 14px;
+     background: var(--bg3);
+     border: 1px solid var(--border2);
+     border-radius: var(--radius-xs);
+     color: var(--text);
+     font-family: 'Vazirmatn', sans-serif;
+     font-size: 0.9rem;
+     outline: none;
+     transition: border-color 0.2s, box-shadow 0.2s;
+     direction: rtl;
+ }
+
+ .input-wrap input::placeholder {
+     color: var(--text3);
+ }
+
+ .input-wrap input:focus {
+     border-color: rgba(110, 231, 183, 0.45);
+     box-shadow: 0 0 0 3px var(--accent-glow);
+ }
+
+ .input-wrap input.has-error {
+     border-color: rgba(248, 113, 113, 0.45);
+     box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.12);
+ }
+
+ /* password toggle */
+ .toggle-pw {
+     position: absolute;
+     left: 12px;
+     top: 50%;
+     transform: translateY(-50%);
+     background: none;
+     border: none;
+     cursor: pointer;
+     color: var(--text3);
+     padding: 2px;
+     display: flex;
+     align-items: center;
+     transition: color 0.2s;
+ }
+
+ .toggle-pw:hover {
+     color: var(--text2);
+ }
+
+ .toggle-pw svg {
+     width: 16px;
+     height: 16px;
+     stroke: currentColor;
+     fill: none;
+     stroke-width: 2;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+ }
+
+ .input-wrap input[type="password"],
+ .input-wrap input[type="text"].pw-field {
+     padding-left: 40px;
+ }
+
+ .field-error {
+     font-size: 0.76rem;
+     color: var(--danger);
+     display: flex;
+     align-items: center;
+     gap: 5px;
+ }
+
+ .field-error::before {
+     content: '⚠';
+     font-size: 0.7rem;
+ }
+
+ /* password strength */
+ .strength-bar {
+     height: 3px;
+     border-radius: 2px;
+     background: var(--bg4);
+     overflow: hidden;
+     margin-top: 2px;
+ }
+
+ .strength-fill {
+     height: 100%;
+     border-radius: 2px;
+     width: 0%;
+     transition: width 0.3s, background 0.3s;
+ }
+
+ /* ── Submit button ── */
+ .submit-btn {
+     width: 100%;
+     padding: 13px;
+     margin-top: 4px;
+     background: var(--accent);
+     border: none;
+     border-radius: var(--radius-xs);
+     color: #0d0d0f;
+     font-family: 'Vazirmatn', sans-serif;
+     font-size: 0.95rem;
+     font-weight: 700;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 8px;
+     transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+ }
+
+ .submit-btn:hover {
+     background: #a7f3d0;
+     box-shadow: 0 6px 24px rgba(110, 231, 183, 0.25);
+ }
+
+ .submit-btn:active {
+     transform: scale(0.98);
+ }
+
+ .submit-btn svg {
+     width: 16px;
+     height: 16px;
+     stroke: #0d0d0f;
+     fill: none;
+     stroke-width: 2.2;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+ }
+
+ /* ── Divider ── */
+ .divider {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin: 4px 0;
+     color: var(--text3);
+     font-size: 0.75rem;
+ }
+
+ .divider::before,
+ .divider::after {
+     content: '';
+     flex: 1;
+     height: 1px;
+     background: var(--border);
+ }
+
+ /* ── Login link ── */
+ .login-link {
+     text-align: center;
+     font-size: 0.83rem;
+     color: var(--text2);
+ }
+
+ .login-link a {
+     color: var(--accent);
+     text-decoration: none;
+     font-weight: 600;
+     transition: color 0.2s;
+ }
+
+ .login-link a:hover {
+     color: var(--accent2);
+ }
+
+ /* ── Footer note ── */
+ .footer-note {
+     margin-top: 24px;
+     font-size: 0.72rem;
+     color: var(--text3);
+     text-align: center;
+     line-height: 1.7;
+ }
+
+ /* ── Responsive ── */
+ @media (max-width: 480px) {
+     .card {
+         padding: 28px 20px 24px;
+         border-radius: 18px;
+     }
+
+     .logo-text {
+         font-size: 1.2rem;
+     }
+ }
