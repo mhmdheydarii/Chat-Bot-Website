@@ -1,0 +1,90 @@
+{% extends 'dashboard/user/base.html' %}
+{% block title %}ویرایش اطلاعات{% endblock %}
+{% block nav_edit %}active{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title">ویرایش اطلاعات</h1>
+    <p class="page-sub">نام، ایمیل و مشخصات خود را بروزرسانی کنید</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <svg viewBox="0 0 24 24" width="17" height="17"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    اطلاعات شخصی
+  </div>
+
+  <form method="post" action=".">
+    {% csrf_token %}
+    <div class="form-grid">
+
+      <!-- First name -->
+      <div class="field">
+        <label for="id_first_name">
+          <svg viewBox="0 0 24 24" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          نام
+        </label>
+        <input
+          type="text" name="first_name"
+          value="{{ form.first_name.value|default:'' }}"
+          placeholder="نام خود را وارد کنید"
+          class="{% if form.first_name.errors %}has-error{% endif %}"
+        >
+        {% for error in form.first_name.errors %}
+          <span class="field-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Last name -->
+      <div class="field">
+        <label for="id_last_name">
+          <svg viewBox="0 0 24 24" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          نام خانوادگی
+        </label>
+        <input
+          type="text" name="last_name"
+          value="{{ form.last_name.value|default:'' }}"
+          placeholder="نام خانوادگی خود را وارد کنید"
+          class="{% if form.last_name.errors %}has-error{% endif %}"
+        >
+        {% for error in form.last_name.errors %}
+          <span class="field-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Email -->
+      <div class="field full">
+        <label>
+          <svg viewBox="0 0 24 24" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          ایمیل
+          <span style="font-size:0.7rem;color:var(--text3);font-weight:400;margin-right:4px;">(غیرقابل تغییر)</span>
+        </label>
+        <input type="email" value="{{ user.email }}" disabled>
+      </div>
+
+      <!-- Username — read only -->
+      <div class="field full">
+        <label>
+          <svg viewBox="0 0 24 24" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          نام کاربری
+          <span style="font-size:0.7rem;color:var(--text3);font-weight:400;margin-right:4px;">(غیرقابل تغییر)</span>
+        </label>
+        <input type="text" value="{{ user.username }}" disabled>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button type="submit" class="btn-primary">
+        <svg viewBox="0 0 24 24" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg>
+        ذخیره تغییرات
+      </button>
+      <a href="{% url 'dashboard:user:profile' %}" class="btn-ghost">انصراف</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
