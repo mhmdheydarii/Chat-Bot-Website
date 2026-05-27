@@ -12,7 +12,7 @@ class UserTypeView(LoginRequiredMixin, View):
         if request.user.is_authenticated:
             if request.user.type == UserType.user.value:
                 return redirect(reverse_lazy("dashboard:user:profile"))
-            if request.user.type == UserType.admin.value:
+            if request.user.type == UserType.admin.value or request.user.type == UserType.superuser.value:
                 return redirect(reverse_lazy("dashboard:admin:profile"))
         else:
             return redirect(reverse_lazy("account:login"))

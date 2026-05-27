@@ -1,8 +1,8 @@
 from django.urls import path, include
 from . import views
 
-urlpatterns = [
-    path("home", views.UserTypeView.as_view(), name="user-type"),
+app_name = "admin"
 
-    path("user/", include("dashboard.user.urls"))
+urlpatterns = [
+    path("profile/", views.AdminProfileview.as_view(), name="profile"),
 ]
