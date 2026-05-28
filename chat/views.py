@@ -115,7 +115,7 @@ class ChatbotView(LoginRequiredMixin, View):
     
 
 class ConversationMessagesView(LoginRequiredMixin, View):
-    """Returns all messages for one conversation — called when user clicks history item"""
+
     def get(self, request, pk):
         conversation = get_object_or_404(ConversationModel, id=pk, user=request.user)
         messages = conversation.message.values('role', 'content', 'created_at')
